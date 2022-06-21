@@ -42,10 +42,38 @@ public class PlusOne66 {
         return res;
     }
 
+    public int[] plusOne(int[] digits) {
+        // 倒序 查找有多少个连续的9
+        int index = -1;
+        for (int i = digits.length - 1; i >= 0; i--) {
+            if (digits[i] == 9) {
+                index = i;
+                continue;
+            } else {
+                break;
+            }
+        }
+        // index就是最后一个9的位置
+        if (index == 0) {
+            int[] res = new int[digits.length + 1];
+            res[0] = 1;
+            return res;
+        } else if (index == -1) {
+            digits[digits.length - 1] = digits[digits.length - 1] + 1;
+            return digits;
+        } else {
+            digits[index - 1] = digits[index - 1] + 1;
+            for (int i = index; i <= digits.length - 1; i++) {
+                digits[i] = 0;
+            }
+            return digits;
+        }
+    }
+
     public static void main(String[] args) {
-        int[] digits = new int[]{1, 2, 3};
+        int[] digits = new int[]{9, 9, 9};
         PlusOne66 plusOne66 = new PlusOne66();
-        int[] ints = plusOne66.plusOneErr(digits);
+        int[] ints = plusOne66.plusOne(digits);
         for (int i : ints) {
             System.err.println(i);
         }
