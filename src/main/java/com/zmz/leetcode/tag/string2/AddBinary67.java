@@ -22,13 +22,26 @@ public class AddBinary67 {
         // 从高位开始计算即可
         int length = Math.max(ar.length(), br.length());
         int carry = 0;
-        for (int i = 0; i < length; i++){
-            carry += i < a.length() ? (a.charAt(i) - '0') : 0;
-            carry += i < b.length() ? (b.charAt(i) - '0') : 0;
+        StringBuilder res = new StringBuilder();
+        for (int i = 0; i < length; i++) {
+            Character t;
+            carry += i < a.length() ? (ar.charAt(i) - '0') : 0;
+            carry += i < b.length() ? (br.charAt(i) - '0') : 0;
 
-
+            // 精髓在这两行 如果不这么做 需要一个if else
+            res.append((char) (carry % 2 + '0'));
+            carry /= 2;
         }
+        if (carry == 1) {
+            res.append('1');
+        }
+        return res.reverse().toString();
+    }
 
+    public static void main(String[] args) {
+        AddBinary67 addBinary67 = new AddBinary67();
+        String s = addBinary67.addBinary("0", "0");
+        System.err.println(s);
 
     }
 
