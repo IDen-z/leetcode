@@ -1,5 +1,7 @@
 package com.zmz.leetcode.tag.sort5;
 
+import java.util.HashSet;
+
 /**
  * 存在重复元素
  */
@@ -10,9 +12,14 @@ public class ContainsDuplicate217 {
      * 如果数组中每个元素互不相同，返回 false 。
      */
     public boolean containsDuplicate(int[] nums) {
-
-
-
+        // 第一反应是用hashTable 如果插入失败则返回true
+        HashSet<Integer> set = new HashSet<>();
+        for (int i : nums){
+            if (!set.add(i)){
+                return true;
+            }
+        }
+        return false;
     }
 
 
