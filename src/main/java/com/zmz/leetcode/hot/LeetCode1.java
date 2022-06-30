@@ -13,6 +13,9 @@ public class LeetCode1 {
      */
     public static void main(String[] args) {
 
+
+
+
     }
 
     /**
@@ -42,12 +45,12 @@ public class LeetCode1 {
     }
 
     /**
-    *  最优解
-     *
-     *  解题的关键是避免On方的循环，也就是用空间换时间
-     *
-     *  利用map 的key无法重复的特性，将数值大小作为key，下标作为值有条件的存入map中
-    */
+     * 最优解
+     * <p>
+     * 解题的关键是避免On方的循环，也就是用空间换时间
+     * <p>
+     * 利用map 的key无法重复的特性，将数值大小作为key，下标作为值有条件的存入map中
+     */
     public int[] twoSum2(int[] nums, int target) {
         if (Objects.isNull(nums) || nums.length == 0) {
             return new int[0];
@@ -57,12 +60,12 @@ public class LeetCode1 {
         //key 下标  value  值
         HashMap<Integer, Integer> map = new HashMap<>();
         for (int i = 0; i < nums.length; i++) {
-            if (map.containsKey(target-nums[i])){
-                res[0]=i;
-                res[1]=map.get(target-nums[i]);
+            if (map.containsKey(target - nums[i])) {
+                res[0] = i;
+                res[1] = map.get(target - nums[i]);
                 return res;
             }
-            map.put(nums[i],i);
+            map.put(nums[i], i);
         }
         return res;
     }
