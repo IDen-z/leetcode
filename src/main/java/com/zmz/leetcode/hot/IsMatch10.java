@@ -18,28 +18,29 @@ public class IsMatch10 {
         // 初始化数组
         int m = s.length();
         int n = p.length();
-        boolean[][] dp = new boolean[m+1][n+1];
+        s = " " + s;
+        p = " " + p;
+        boolean[][] dp = new boolean[m + 1][n + 1];
         dp[0][0] = true;
         for (int i = 0; i <= m; i++) {
-            for (int j =1;j<=n;j++){
-
-
+            for (int j = 1; j <= n; j++) {
+                if (j + 1 <= n && p.charAt(j + 1) == '*') {
+                    continue;
+                }
+                if (p.charAt(j) != '*') {
+                    dp[i][j] = (i > 0 && j > 0 && dp[i - 1][j - 1]) && (p.charAt(j) == s.charAt(i) || p.charAt(j) == '.');
+                } else {
+                    // 当p==*时 有两种可能 0个 或多个
+                    dp[i][j] = (j > 1 && dp[i][j - 2]) || (i > 0 && j > 0 && dp[i - 1][j] && (p.charAt(j - 1) == s.charAt(i) || p.charAt(j-1) == '.'));
+                }
             }
-
-
         }
-
-        return false;
+        return dp[m][n];
     }
 
-    public boolean matches(String s, String p, int i, int j) {
-        if (i == 0) {
-            return false;
-        }
-        if (p.charAt(j - 1) == '.') {
-            return true;
-        }
-        return s.charAt(i - 1) == p.charAt(j - 1);
+    public static void main(String[] args) {
+        IsMatch10 isMatch10 = new IsMatch10();
+        isMatch10.isMatch("ab",".*");
     }
 
 
