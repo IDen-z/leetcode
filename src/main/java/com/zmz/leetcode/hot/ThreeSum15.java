@@ -21,14 +21,33 @@ public class ThreeSum15 {
         List<List<Integer>> res = new ArrayList<>();
         // 查看题解 发现解题思路主要在于不让结果重复上面
         // 放弃使用数据结构 考虑利用有序数组和指针进行解决问题
-
+        Arrays.sort(nums);
+        // 从低向高遍历
+        int l = nums.length;
+        int index = l - 1;
+        for (int i = 0; i < l; i++) {
+            for (int j = i + 1; j < l; j++) {
+                index = l - 1;
+                while (j != index) {
+                    if (nums[i] + nums[j] + nums[index] == 0) {
+                        ArrayList<Integer> list = new ArrayList<>();
+                        list.add(nums[i]);
+                        list.add(nums[j]);
+                        list.add(nums[index]);
+                        res.add(list);
+                        break;
+                    } else {
+                        index--;
+                    }
+                }
+            }
+        }
         return res;
     }
 
     public static void main(String[] args) {
         ThreeSum15 threeSum15 = new ThreeSum15();
-        threeSum15.threeSum(new int[]{-1,0,1,2,-1,-4});
-
+        threeSum15.threeSum(new int[]{-1, 0, 1, 2, -1, -4});
     }
 
 }
