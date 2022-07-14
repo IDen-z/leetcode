@@ -26,7 +26,9 @@ public class Trap42 {
             dpR[i] = Math.max(dpR[i + 1], height[i + 1]);
         }
         // 第三次循环计算每个格子的雨水并且累加
-        for (int i = 1; i < n - 2; i++) {
+        // 这里可以进行优化 在第二个循环中已经可以进行求解此位置的雨水量了
+        // 因为这个时候的左右位置的最高位置都已经得到
+        for (int i = 1; i <= n - 2; i++) {
             res += Math.min(dpL[i], dpR[i]) > height[i] ? Math.min(dpL[i], dpR[i]) - height[i] : 0;
         }
         return res;
@@ -34,7 +36,7 @@ public class Trap42 {
 
     public static void main(String[] args) {
         Trap42 trap42 = new Trap42();
-        trap42.trap(new int[]{0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1});
+        trap42.trap(new int[]{4,2,0,3,2,5});
     }
 
 }
