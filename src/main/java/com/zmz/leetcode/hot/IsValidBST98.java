@@ -38,7 +38,10 @@ public class IsValidBST98 {
             return false;
         }
         if (node.left != null) {
-            return dfsIntervalOrder(node.left, res, flag);
+            if (!dfsIntervalOrder(node.left, res, flag)) {
+                flag = 1;
+                return false;
+            }
         }
         if (!res.isEmpty() && res.get(res.size() - 1) >= node.val) {
             flag = 1;
@@ -49,7 +52,7 @@ public class IsValidBST98 {
         if (node.right != null) {
             return dfsIntervalOrder(node.right, res, flag);
         }
-        return false;
+        return flag != 1;
     }
 
     public static void main(String[] args) {
@@ -65,6 +68,7 @@ public class IsValidBST98 {
     }
 
     long pre = Long.MIN_VALUE; // 记录上一个节点的值，初始值为Long的最小值
+
     // 中序遍历
     private boolean inorderOff(TreeNode node) {
         if (node == null) return true;
