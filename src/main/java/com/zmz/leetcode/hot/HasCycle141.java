@@ -15,7 +15,7 @@ public class HasCycle141 {
      * 如果链表中存在环 ，则返回 true 。 否则，返回 false 。
      */
     public boolean hasCycle(ListNode head) {
-        // 思路一 快慢指针 慢指针走一步 快指针走两步 有环就会相遇
+        // 思路一 快慢指针 慢指针走一步 快指针走两步 有环就会相遇 这种方法会改变自身链表
         // 思路二 遍历时将节点的下一个指向只给本身
         if (head == null) return false;
         ListNode pre = head;
