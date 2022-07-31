@@ -3,7 +3,7 @@ package com.zmz.leetcode.hot;
 /**
  * 打家劫舍
  */
-public class Rob {
+public class Rob198 {
 
 
     /**
