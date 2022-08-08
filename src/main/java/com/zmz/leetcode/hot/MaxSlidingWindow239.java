@@ -67,6 +67,13 @@ public class MaxSlidingWindow239 {
         return res;
     }
 
+
+    public static void main(String[] args) {
+        MaxSlidingWindow239 maxSlidingWindow239 = new MaxSlidingWindow239();
+        int[] nums = new int[]{1, 3, -1, -3, 5, 3, 2, 1};
+        int[] ints = maxSlidingWindow239.maxSlidingWindowOff(nums, 3);
+    }
+
 }
 
 
