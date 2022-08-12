@@ -1,6 +1,5 @@
 package com.zmz.leetcode.hot;
 
-import org.jcp.xml.dsig.internal.dom.DOMUtils;
 
 /**
  * 乘积最大子数组
