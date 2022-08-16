@@ -53,7 +53,7 @@ public class Rob337 {
         int[] left = dfsSolve(node.left);
         int[] right = dfsSolve(node.right);
         // 0 表示不偷 1 表示偷
-        // 当前节点选择不偷：当前节点能偷到的最大钱数 = 左孩子能偷到的钱 + 右孩子能偷到的钱
+        // 当前节点选择不偷：当前节点能偷到的最大钱数 = 左孩子能偷到的最大钱 + 右孩子能偷到的最大钱
         //当前节点选择偷：当前节点能偷到的最大钱数 = 左孩子选择自己不偷时能得到的钱 + 右孩子选择不偷时能得到的钱 + 当前节点的钱数
         int[] dp = new int[2];
         dp[0] = Math.max(left[0], left[1]) + Math.max(right[0], right[1]);
