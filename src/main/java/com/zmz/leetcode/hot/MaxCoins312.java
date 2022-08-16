@@ -18,25 +18,35 @@ public class MaxCoins312 {
         int[] temp = new int[n + 2];
         temp[0] = 1;
         temp[n + 1] = 1;
+        // 初始化temp数组
         for (int i = 0; i < n; i++) {
             temp[i + 1] = nums[i];
         }
-        int[][] dp = new int[n + 2][n + 2];
-        // len表示开区间长度
-        for (int len = 3; len <= n + 2; len++) {
-            // i表示开区间左端点
-            for (int i = 0; i <= n + 2 - len; i++) {
-                int res = 0;
-                // k为开区间内的索引
-                for (int k = i + 1; k < i + len - 1; k++) {
-                    int left = dp[i][k];
-                    int right = dp[k][i + len - 1];
-                    res = Math.max(res, left + temp[i] * temp[k] * temp[i + len - 1] + right);
+        // 动态规划数组 dp[i][j] 表示开区间(i,j)内 戳破气球所获得的最大金币
+        // 1,1,3,5,8,1
+        // 0,1,2,3,4,5
+        int[][] dp = new int[temp.length][temp.length];
+        // 由于是开区间 因此每次i j 的间隔都应该最小是3
+        // 这里必须要倒着遍历 是为什么？
+        // 正向也是可以的，核心是 外面两层 for 循环之间要从小区间向大区间转移，也就是 j 和 i 的区间范围从小到大去转移
+        for (int i = temp.length - 3; i >= 0; i--) {
+            // 右区间
+            for (int j = i + 2; j < temp.length; j++) {
+                // 对k进行遍历取最大值
+                for (int k = i + 1; k < j; k++) {
+                    dp[i][j] = Math.max(dp[i][j], dp[i][k] + dp[k][j] + temp[i] * temp[j] * temp[k]);
                 }
-                dp[i][i + len - 1] = res;
             }
         }
-        return dp[0][n + 1];
+        return dp[0][dp.length - 1];
+    }
+
+    public static void main(String[] args) {
+        MaxCoins312 maxCoins312 = new MaxCoins312();
+        int[] nums = new int[]{3, 1, 5, 8};
+        int i = maxCoins312.maxCoins(nums);
+        System.err.println(i);
+
     }
 
 
