@@ -54,81 +54,81 @@ public class FullJustify68 {
     //]
 
     public static void main(String[] args) {
-        String[] s =new String[]{"This", "is", "an", "example", "of", "text", "justification."};
-        fullJustify(s,20);
+        String[] s = new String[]{"What", "must", "be", "acknowledgment", "shall", "be"};
+        fullJustify(s, 16);
     }
 
-    public static List<String> fullJustify(String[] words, int maxWidth) {
-        // 按照需求模拟
-        // 顺序填充words到每一行
-        List<String> ans = new ArrayList<String>();
-        // right 用来记录已经处理到哪个单词了
-        int right = 0;
-        while (true) {
-            // 一直循环模拟 直到最后一行
-
-            // 先计算出每一行最多能有多少个单词
-            // left 用来记录当前行是从哪个单词开始的
-            int left = right;
-            // 用来记录当前行单词的长度一共是多长
-            // 这里的 right-left的值需要理解 right 是当前行数的所有单词下标 left是当前行开始的单词下标
-            // 做差其实就是当前行有多少个单个空格
-            // 每个单词之间要保证有一个空格
-            int sumLen = 0;
-            // 每一行要恰好有maxWidth 个字符
-            while (right < words.length && sumLen + words[right].length() + right - left <= maxWidth) {
-                sumLen += words[right].length();
-                right++;
-            }
-
-
-            // 当处理到最后一个单词时 当前行是最后一行 right ++ 后
-            if (right == words.length) {
-                StringBuffer sb = join(words, left, words.length, " ");
-                // blank 方法为填充空格
-                sb.append(blank(maxWidth - sb.length()));
-                ans.add(sb.toString());
-                return ans;
-            }
-
-            // 因为right 已经自增 那么right已经变成了下一行的开始
-            // 上一行的单词个数
-            int numWords = right - left;
-            int numSpaces = maxWidth - sumLen;
-
-            // 当前行只有一个单词：该单词左对齐，在行末填充剩余空格
-            if (numWords == 1) {
-                StringBuffer sb = new StringBuffer(words[left]);
-                sb.append(blank(numSpaces));
-                ans.add(sb.toString());
-                continue;
-            }
-
-            // 当前行不只一个单词
-            int avgSpaces = numSpaces / (numWords - 1);
-            int extraSpaces = numSpaces % (numWords - 1);
-            StringBuffer sb = new StringBuffer();
-            sb.append(join(words, left, left + extraSpaces + 1, blank(avgSpaces + 1))); // 拼接额外加一个空格的单词
-            sb.append(blank(avgSpaces));
-            sb.append(join(words, left + extraSpaces + 1, right, blank(avgSpaces))); // 拼接其余单词
-            ans.add(sb.toString());
-
-
-        }
-
-
-    }
-
-    // join 返回用 sep 拼接 [left, right) 范围内的 words 组成的字符串
-    public static StringBuffer join(String[] words, int left, int right, String sep) {
-        StringBuffer sb = new StringBuffer(words[left]);
-        for (int i = left + 1; i < right; ++i) {
-            sb.append(sep);
-            sb.append(words[i]);
-        }
-        return sb;
-    }
-
+    //    public static List<String> fullJustify(String[] words, int maxWidth) {
+//        // 按照需求模拟
+//        // 顺序填充words到每一行
+//        List<String> ans = new ArrayList<String>();
+//        // right 用来记录已经处理到哪个单词了
+//        int right = 0;
+//        while (true) {
+//            // 一直循环模拟 直到最后一行
+//
+//            // 先计算出每一行最多能有多少个单词
+//            // left 用来记录当前行是从哪个单词开始的
+//            int left = right;
+//            // 用来记录当前行单词的长度一共是多长
+//            // 这里的 right-left的值需要理解 right 是当前行数的所有单词下标 left是当前行开始的单词下标
+//            // 做差其实就是当前行有多少个单个空格
+//            // 每个单词之间要保证有一个空格
+//            int sumLen = 0;
+//            // 每一行要恰好有maxWidth 个字符
+//            while (right < words.length && sumLen + words[right].length() + right - left <= maxWidth) {
+//                sumLen += words[right].length();
+//                right++;
+//            }
+//
+//
+//            // 当处理到最后一个单词时 当前行是最后一行 right ++ 后
+//            if (right == words.length) {
+//                StringBuffer sb = join(words, left, words.length, " ");
+//                // blank 方法为填充空格
+//                sb.append(blank(maxWidth - sb.length()));
+//                ans.add(sb.toString());
+//                return ans;
+//            }
+//
+//            // 因为right 已经自增 那么right已经变成了下一行的开始
+//            // 上一行的单词个数
+//            int numWords = right - left;
+//            int numSpaces = maxWidth - sumLen;
+//
+//            // 当前行只有一个单词：该单词左对齐，在行末填充剩余空格
+//            if (numWords == 1) {
+//                StringBuffer sb = new StringBuffer(words[left]);
+//                sb.append(blank(numSpaces));
+//                ans.add(sb.toString());
+//                continue;
+//            }
+//
+//            // 当前行不只一个单词
+//            int avgSpaces = numSpaces / (numWords - 1);
+//            int extraSpaces = numSpaces % (numWords - 1);
+//            StringBuffer sb = new StringBuffer();
+//            sb.append(join(words, left, left + extraSpaces + 1, blank(avgSpaces + 1))); // 拼接额外加一个空格的单词
+//            sb.append(blank(avgSpaces));
+//            sb.append(join(words, left + extraSpaces + 1, right, blank(avgSpaces))); // 拼接其余单词
+//            ans.add(sb.toString());
+//
+//
+//        }
+//
+//
+//    }
+//
+//    // join 返回用 sep 拼接 [left, right) 范围内的 words 组成的字符串
+//    public static StringBuffer join(String[] words, int left, int right, String sep) {
+//        StringBuffer sb = new StringBuffer(words[left]);
+//        for (int i = left + 1; i < right; ++i) {
+//            sb.append(sep);
+//            sb.append(words[i]);
+//        }
+//        return sb;
+//    }
+//
     // blank 返回长度为 n 的由空格组成的字符串
     public static String blank(int n) {
         StringBuffer sb = new StringBuffer();
@@ -137,5 +137,96 @@ public class FullJustify68 {
         }
         return sb.toString();
     }
+//
+
+    public static List<String> fullJustify(String[] words, int maxWidth) {
+        // 通过模拟解决问题
+        // 首先计算每一行最多可以填充多少个单词 同时单词之间最少保留一个空格
+        // 其次判断当前行的情况
+        // 1、处理到最后一个单词 且当前行是最后一行 跳出循环 同时单词在最左边开始，每个单词之间保留一个空格，后面全部填充空格至最大长度
+        // 2、当前行不是最后一行分为两种情况
+        //    第一种当前行只有一个单词 那么后面填充空格就行
+        //    第二种 当前行有多个单词 首先计算当前行有多少个单词numWords
+        //          在计算当前行应该填充多少个空格 numSpaces
+        //          需要从左到右填充 分配空格 numSpaces / numWords-1 = 每个单词最少填充的空格
+        //          extra=numSpaces % numWords-1 为需要额外填充的空格 也就是说 从单词左开始 顺序往后多加一个空格 extra就是间隔的数目
+        List<String> res = new ArrayList<>();
+        int right = 0; // right 表示结束单词的下标
+        while (true) {
+            // 开始一行一行处理
+            int left = right; // left 记录每行单词开始的下标
+            int sumLen = 0; // 记录每行字符总数
+            while (right < words.length && words[right].length() + sumLen + right - left <= maxWidth) {
+                sumLen += words[right].length();
+                right++;
+            }
+
+            if (right == words.length) {
+                // 最后一行是不需考虑左空格和右空格谁多的问题的
+                // 因为无需两端对齐 只需要左对齐
+                // 先把left 到 right-1的单词进行填充 后面补空格即可
+                StringBuilder sb = new StringBuilder();
+                sb.append(words[left]);
+                for (int i = left + 1; i < right; i++) {
+                    sb.append(' ');
+                    sb.append(words[i]);
+                }
+                // 剩下的补空格
+                int length = sb.length();
+                for (int j = 0; j < maxWidth - length; j++) {
+                    sb.append(' ');
+                }
+                res.add(sb.toString());
+                return res;
+            }
+            int numWords = right - left;
+            int numSpaces = maxWidth - sumLen;
+
+            if (numWords == 1) {
+                StringBuilder sb = new StringBuilder();
+                sb.append(words[left]);
+                int length = sb.length();
+                for (int j = 0; j < maxWidth - length; j++) {
+                    sb.append(' ');
+                }
+                res.add(sb.toString());
+                continue;
+            }
+            // aaa  bbb ccc
+            // 普通行
+            int avgSpaces = numSpaces / (numWords - 1);
+            int extraSpaces = numSpaces % (numWords - 1);
+            StringBuilder sb = new StringBuilder();
+            sb.append(words[left]);
+            for (int i = left + 1; i < left + extraSpaces + 1; i++) {
+                int index = 0;
+                while (index < avgSpaces) {
+                    sb.append(' ');
+                    index++;
+                }
+                sb.append(' ');
+                sb.append(words[i]);
+            }
+            int index2 = 0;
+            while (index2 < avgSpaces) {
+                sb.append(' ');
+                index2++;
+            }
+            sb.append(words[left + extraSpaces + 1]);
+            for (int i = left + extraSpaces + 1 + 1; i < right; i++) {
+                int index = 0;
+                while (index < avgSpaces) {
+                    sb.append(' ');
+                    index++;
+                }
+                sb.append(words[i]);
+            }
+            res.add(sb.toString());
+
+        }
+
+
+    }
+
 
 }
