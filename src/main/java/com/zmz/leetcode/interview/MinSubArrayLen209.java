@@ -38,13 +38,17 @@ public class MinSubArrayLen209 {
         for (; right < nums.length; right++) {
             sum += nums[right];
             if (sum >= target) {
-                while (true) {
-                    if (sum - nums[left] >= target) {
-                        sum -= nums[left];
-                        left++;
-                    } else {
-                        break;
-                    }
+//                while (true) {
+//                    if (sum - nums[left] >= target) {
+//                        sum -= nums[left];
+//                        left++;
+//                    } else {
+//                        break;
+//                    }
+//                }
+                while (sum - nums[left] >= target) {
+                    sum -= nums[left];
+                    left++;
                 }
                 res = Math.min(res, right - left + 1);
             }
