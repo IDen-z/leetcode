@@ -2,6 +2,8 @@ package com.zmz.leetcode.interview;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class LongestConsecutive128 {
 
@@ -27,6 +29,7 @@ public class LongestConsecutive128 {
         longestConsecutive(nums);
     }
 
+    // 排序 基本不给过 同时需要考虑一下相同元素的问题
     public static int longestConsecutive(int[] nums) {
         if (nums.length < 1) {
             return 0;
@@ -48,5 +51,35 @@ public class LongestConsecutive128 {
         return res;
 
     }
+
+    // 优化解法
+    public static int longestConsecutive_opt(int[] nums) {
+        // 使用hash表去重 同时可以利用这个hash表来判断是否需要进行遍历查询
+        Set<Integer> set = new HashSet<>();
+        for (int i : nums) {
+            set.add(i);
+        }
+        int res = 0;
+        // 遍历数组
+        // TODO 这里一定要用set遍历 因为已经进行去重了
+        for (int i : set) {
+            // 如果该数字的上一个数字在hash表内 说明这个数字不是序列的开头数字 那么就没有遍历的必要 直接跳过
+            if (set.contains(i - 1)) {
+                continue;
+            }
+            // 不包含说明这个数字就是开头数字 进行遍历寻找最长序列
+            int k = 1;
+            int n = i;
+            while (set.contains(n + 1)) {
+                n++;
+                k++;
+            }
+            res = Math.max(res, k);
+        }
+        return res;
+
+
+    }
+
 
 }
