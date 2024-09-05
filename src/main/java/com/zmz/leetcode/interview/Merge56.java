@@ -1,5 +1,10 @@
 package com.zmz.leetcode.interview;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+
 public class Merge56 {
 
     // 以数组 intervals 表示若干个区间的集合，其中单个区间为 intervals[i] = [starti, endi] 。
@@ -18,8 +23,33 @@ public class Merge56 {
     //输出：[[1,5]]
     //解释：区间 [1,4] 和 [4,5] 可被视为重叠区间。
 
-    public int[][] merge(int[][] intervals) {
+    public static void main(String[] args) {
+        int[][] array = new int[][]{{1, 4}, {0, 4}};
+        merge(array);
+    }
 
+    public static int[][] merge(int[][] intervals) {
+        // 先根据左区间开口排序
+        Arrays.sort(intervals, Comparator.comparingInt(o -> o[0]));
+
+        // 排序后开始遍历
+        int left;
+        int right;
+        // 左区间
+        List<int[]> list = new ArrayList<>();
+        for (int i = 0; i < intervals.length; i++) {
+            left = intervals[i][0];
+            right = intervals[i][1];
+            while (i + 1 < intervals.length && intervals[i + 1][0] <= right) {
+                // TODO 这里容易出错
+                right = Math.max(intervals[i + 1][1], right);
+                i = i + 1;
+            }
+            list.add(new int[]{left, right});
+
+        }
+
+        return list.toArray(new int[list.size()][]);
     }
 
 }
