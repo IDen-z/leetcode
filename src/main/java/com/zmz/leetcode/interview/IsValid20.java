@@ -38,6 +38,11 @@ public class IsValid20 {
     //输入：s = "([])"
     //
     //输出：true
+    Map<Character, Character> pairs = new HashMap<Character, Character>() {{
+        put(')', '(');
+        put(']', '[');
+        put('}', '{');
+    }};
 
     public boolean isValid(String s) {
         Map<Character, Character> map = new HashMap<>();
