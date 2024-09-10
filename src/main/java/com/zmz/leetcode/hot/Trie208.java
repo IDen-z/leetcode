@@ -59,6 +59,7 @@ public class Trie208 {
             if (node.childrenNodes[index] == null) {
                 return false;
             }
+            // TODO 这里是找完整单词 而不是前缀
             if (i == word.length() - 1 && !node.childrenNodes[index].endFlag) {
                 return false;
             }
@@ -85,6 +86,10 @@ public class Trie208 {
 
     public static void main(String[] args) {
 
+        Trie208 obj = new Trie208();
+        obj.insert("apple");
+        boolean param_2 = obj.search("apple");
+        boolean param_3 = obj.startsWith("app");
     }
 
 }
