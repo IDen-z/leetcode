@@ -29,30 +29,68 @@ public class Trie208 {
     //trie.insert("app");
     //trie.search("app");     // 返回 True
 
-
-    // TODO 0 代表a  同时每一个分支 都是具有26个字母的叉
-    private Trie208[] children;
+    // 前缀树主要就是每个字符作为一个节点 最终组成树状结构
+    // 同时nextNode作为属性值放在节点中
+    private Trie208[] nextNode;
+    // 该属性值表示 是否构成了完整的单词
     private boolean isEnd;
 
-//    public Trie208() {
-//        children = new Trie208[26];
-//        isEnd = false;
-//    }
-//
-//    public void insert(String word) {
-//        for (int i = 0; i < word.length(); i++) {
-//
-//
-//        }
-//    }
-//
-//    public boolean search(String word) {
-//
-//    }
-//
-//    public boolean startsWith(String prefix) {
-//
-//    }
+    public Trie208() {
+        nextNode = new Trie208[26];
+        isEnd = false;
+    }
+
+    public void insert(String word) {
+        // 这里必须要一个node 这样才可以让node一直向下走
+        Trie208 node = this;
+        // 插入操作
+        for (int i = 0; i < word.length(); i++) {
+            // 字符在哪个位置 就放在数组的对应位置
+            int index = word.charAt(i) - 'a';
+            if (node.nextNode[index] == null) {
+                node.nextNode[index] = new Trie208();
+            }
+            if (i == word.length() - 1) {
+                node.nextNode[index].isEnd = true;
+                break;
+            }
+
+            node = node.nextNode[index];
+        }
+
+    }
+
+    public boolean search(String word) {
+        // 查找单词全
+        Trie208 node = this;
+        for (int i = 0; i < word.length(); i++) {
+            // 字符在哪个位置 就放在数组的对应位置
+            int index = word.charAt(i) - 'a';
+            if (node.nextNode[index] == null) {
+                return false;
+            }
+            if (i == word.length() - 1 && !node.nextNode[index].isEnd) {
+                return false;
+            }
+            node = node.nextNode[index];
+        }
+        return true;
+
+    }
+
+    public boolean startsWith(String prefix) {
+        // 查找单词前缀
+        Trie208 node = this;
+        for (int i = 0; i < prefix.length(); i++) {
+            // 字符在哪个位置 就放在数组的对应位置
+            int index = prefix.charAt(i) - 'a';
+            if (node.nextNode[index] == null) {
+                return false;
+            }
+            node = node.nextNode[index];
+        }
+        return true;
+    }
 
 
 }
