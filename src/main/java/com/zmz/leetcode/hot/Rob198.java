@@ -4,6 +4,9 @@ package com.zmz.leetcode.hot;
  * 打家劫舍
  */
 public class Rob198 {
+    public static void main(String[] args) {
+        rob(new int[]{2,7,1,3,9});
+    }
 
 
     /**
@@ -11,7 +14,7 @@ public class Rob198 {
      * <p>
      * 给定一个代表每个房屋存放金额的非负整数数组，计算你 不触动警报装置的情况下 ，一夜之内能够偷窃到的最高金额。
      */
-    public int rob(int[] nums) {
+    public static int rob(int[] nums) {
         // 动态规划
         if (nums.length==0){
             return 0;
