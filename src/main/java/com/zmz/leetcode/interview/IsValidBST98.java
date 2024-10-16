@@ -11,6 +11,7 @@ public class IsValidBST98 {
     //所有左子树和右子树自身必须也是二叉搜索树。
 
     public boolean isValidBST(TreeNode root) {
+        // TODO 画图
         if (root == null) {
             return false;
         }
