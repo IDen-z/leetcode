@@ -28,7 +28,7 @@ public class Permute46 {
         List<List<Integer>> res = new ArrayList<>();
         List<Integer> list = new ArrayList<>();
         // 全排列 直接递归 dfs
-        dfsHelper(nums, res, list, 0);
+        dfsHelper(nums, res, list);
         return res;
     }
 
