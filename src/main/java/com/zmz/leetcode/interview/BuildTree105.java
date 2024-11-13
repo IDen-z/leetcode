@@ -40,6 +40,47 @@ public class BuildTree105 {
     }
 
 
+    public TreeNode buildTreeTwo(int[] preorder, int[] inorder) {
+        // 前序遍历的第一个节点是当前根节点
+        // 中序遍历数组的 当前根节点左右两边分别是左子节点的中序遍历数组 和 右子节点的中序遍历数组
+        Map<Integer, Integer> map = new HashMap<>();
+        // 构建一个map 记录前序遍历的根节点对应在中序遍历的位置
+        for (int i = 0; i < inorder.length; i++) {
+            map.put(inorder[i], i);
+        }
+        return dfsMethod(preorder, 0, preorder.length - 1, 0, inorder.length - 1, map);
+    }
+
+    private TreeNode dfsMethod(int[] preorder, int preStart, int preEnd, int inStart, int inEnd, Map<Integer, Integer> map) {
+
+        // 递归终止条件判断
+        if (preEnd < preStart || inEnd < inStart) {
+            // 中序或者前序数组不够用了
+            return null;
+        }
+        TreeNode root = new TreeNode(preorder[preStart]);
+        // index 表示 根节点在中序遍历数组中的位置
+        int index = map.get(preorder[preStart]);
+
+        // 计算 左子树 下一个前序遍历数组的开始位置 和 结束位置
+        // 开始 preStart+1    preStart+(index-inStart)
+
+        // 计算 左子树 下一个中序遍历数组的开始位置 和 结束位置
+        // 开始 inStrat     index-1
+
+
+        // 计算 右子树 下一个前序遍历数组的开始位置 和 结束位置
+        // 开始 preStart+(index-inStart)+1   preEnd
+
+        // 计算 右子树 下一个中序遍历数组的开始位置 和 结束位置
+        // 开始 index+1     inENd
+
+        root.left = dfsMethod(preorder, preStart+1, preStart+(index-inStart), inStart, index - 1, map);
+        root.right = dfsMethod(preorder, preStart + (index - inStart) + 1, preEnd, index + 1, inEnd, map);
+        return root;
+    }
+
+
     public class TreeNode {
         int val;
         TreeNode left;

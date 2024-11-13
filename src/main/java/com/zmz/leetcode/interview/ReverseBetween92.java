@@ -56,6 +56,32 @@ public class ReverseBetween92 {
         return first.next;
     }
 
+    public static ListNode reverseBetweenTwo(ListNode head, int left, int right) {
+        // 1 2 3 4 5   输入  2  4  表示第二个 到 第四个 进行翻转 每次都把节点插到1 后面就可以
+
+        // 先找到开始循环的第一个节点的前一个节点
+        // 找到这个节点的作用是在循环过程中 可以把每一个当前节点插入到这个前一个节点后面
+        // 因此需要在链表的前面插一个初始节点 这样就是left从1 开始 也可以统一处理
+        ListNode first = new ListNode();
+        first.next = head;
+        // first 1 2 3 4 5
+        ListNode pre = first;
+        // 索引节点 需要找到 开始循环的第一个节点
+        for (int i = 0; i < left - 1; i++) {
+            pre = pre.next;
+        }
+        // pre节点不变 每次都插当前循环节点的下一个节点
+        ListNode current = pre.next;
+        for (int i = left; i < right; i++) {
+            ListNode tmp1 = current.next;
+            ListNode tmp2 = pre.next;
+            current.next = current.next.next;
+            pre.next = tmp1;
+            tmp1.next = tmp2;
+        }
+        return first.next;
+    }
+
 
     public static class ListNode {
         int val;
