@@ -35,12 +35,12 @@ public class CalcEquation399 {
     //输入：equations = [["a","b"]], values = [0.5], queries = [["a","b"],["b","a"],["a","c"],["x","y"]]
     //输出：[0.50000,2.00000,-1.00000,-1.00000]
 
-    public double[] calcEquation(List<List<String>> equations, double[] values, List<List<String>> queries) {
-
-
-
-
-    }
+//    public double[] calcEquation(List<List<String>> equations, double[] values, List<List<String>> queries) {
+//
+//
+//
+//
+//    }
 
 
 
