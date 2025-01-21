@@ -1,9 +1,7 @@
 package com.zmz.leetcode.interview;
 
-import com.sun.jmx.remote.internal.ArrayQueue;
-
 import java.util.ArrayDeque;
-import java.util.Deque;
+import java.util.Arrays;
 import java.util.Queue;
 
 public class CoinChange322 {
@@ -29,7 +27,7 @@ public class CoinChange322 {
     //输出：0
     public static void main(String[] args) {
         CoinChange322 bean = new CoinChange322();
-        bean.coinChange(new int[]{1}, 0);
+        bean.coinChangeDp(new int[]{2}, 3);
     }
 
     public int coinChange(int[] coins, int amount) {
@@ -72,6 +70,25 @@ public class CoinChange322 {
         }
         return -1;
 
+    }
+
+    // 采用动态规划进行求解
+    public int coinChangeDp(int[] coins, int amount) {
+        int[] dp = new int[amount + 1];
+        // 这里不能用最大值填充
+        // 否则会进行溢出
+        Arrays.fill(dp, amount+1);
+        dp[0] = 0;
+
+        for (int i = 0; i < dp.length; i++) {
+
+            for (int coin : coins) {
+                if (i >= coin) {
+                    dp[i] = Math.min(dp[i], dp[i - coin] + 1);
+                }
+            }
+        }
+        return dp[dp.length - 1] == amount+1 ? -1 : dp[dp.length - 1];
     }
 
 
